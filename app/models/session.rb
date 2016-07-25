@@ -6,6 +6,7 @@ class Session < ActiveRecord::Base
   has_many :wips, :dependent => :destroy
   has_many :blockers, :dependent => :destroy
   belongs_to :team
+  acts_as_taggable
 
   def self.get_users(ids)
 

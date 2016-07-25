@@ -19,7 +19,43 @@
             </div>
           </div>
           <div class="card-content">
-            <%= render partial: 'sessions/user_content' %>
+
+            <% @session_users.each do |user| %>
+            <div class="session">
+              <h6><%= link_to  "#{user.first_name}" " " "#{user.last_name}", edit_user_path(user) %></h6>
+              <ul>
+                <li>
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td><% @session_wips.where(user_id: user.id, session_id: @session.id).each do |wip| %>
+                          <ul>
+                            <li><%= render partial:'wips/form', locals: {wip: wip} %></li>
+                          </ul>
+                          <% end %>
+                        </td>
+                        <td><% @session_completeds.where(user_id: user.id, session_id: @session.id).each do |completed| %>
+                          <ul>
+                            <li><%= render partial:'completeds/form', locals: {completed: completed} %></li>
+                          </ul>
+                          <% end %>
+                        </td>
+                        <td><% @session_blockers.where(user_id: user.id, session_id: @session.id).each do |blocker| %>
+                          <ul> <%= blocker.id %>
+                            <li><%= render partial:'blockers/form', locals: {blocker: blocker} %></li>
+                          </ul>
+                          <% end %>
+                        </td>
+
+                      </tr>
+                    </tbody>
+                  </table>
+                </li>
+              </ul>
+            </div>
+            <div class="divider"></div></br>
+            <% end %>
+
           </div>
           <div class="card-action">
             <select multiple id="addUserToSession">

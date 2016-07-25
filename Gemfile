@@ -28,6 +28,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'activerecord-reset-pk-sequence'
 
+gem 'acts-as-taggable-on'
+
 # Use ActiveModel has_secure_password
 
 # Use Unicorn as the app server

@@ -1,5 +1,6 @@
 module SessionsHelper
 
+
   def searchByUser(users)
 
     found_users = []
@@ -37,5 +38,6 @@ module SessionsHelper
     end
     users
   end
+
 
 end

@@ -1,4 +1,5 @@
 class BlockersController < ApplicationController
+  include ApplicationHelper
   # before_filter :get_session, only: [:show]
   before_action :set_blocker, only: [:show, :edit, :update, :destroy]
   before_filter :get_session, only: [:edit, :update]
@@ -33,7 +34,10 @@ class BlockersController < ApplicationController
   # POST /blockers.json
   def create
     @blocker = user.blocker.new(blocker_params)
-
+    @team = Team.find(session[:team_id])
+    @users = Session.get_users(params[:user_ids].map{|i| i.to_i})
+    @session.tag_list = get_user_first_names(@users)
+    byebug
     respond_to do |format|
       if @blocker.save
         format.html { redirect_to @blocker, notice: 'Blocker was successfully created.' }
